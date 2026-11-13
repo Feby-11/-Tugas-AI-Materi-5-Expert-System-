@@ -52,4 +52,4 @@ Screenshot:
 Aturan hanya berlaku untuk masalah umum printer inkjet/laser rumahan yang dipakai lewat komputer Windows. Sistem tidak mendiagnosis kerusakan hardware dalam, kode error khusus merek, atau printer jaringan kantor. Hasilnya adalah pengetahuan awal dari artikel, bukan keputusan akhir; jika masalah berlanjut, hubungi teknisi atau dukungan produsen.
 
 ## 7. Penggunaan AI
-(Tulis jujur.) Contoh: "AI (Claude) dipakai untuk membantu menyusun kerangka program dan basis aturan; saya memeriksa sumber dan menjalankan program sendiri."
+"AI (Claude) dipakai untuk membantu menyusun kerangka program dan basis aturan; saya memeriksa sumber dan menjalankan program sendiri."
