@@ -1,0 +1,39 @@
+{
+  "judul": "Diagnosis Printer yang Tidak Mau Mencetak",
+  "batas": "Hanya mencakup printer inkjet/laser rumahan yang dipakai lewat komputer Windows. Tidak mencakup kerusakan hardware dalam (motor, board), kode error spesifik merek, atau printer jaringan kantor yang dikelola admin.",
+  "sumber": {
+    "S1": "HP, 'Printer Troubleshooting: Quick Fixes for Common Printing Problems' (Oluwakemi Oladapo, 23 Feb 2026), https://www.hp.com/us-en/tech-takes/printers/troubleshooting/printer-troubleshooting-common-problems-quick-fixes.html, diakses 11 Nov 2026",
+    "S2": "HP Support, 'Print job stuck in queue', https://support.hp.com/us-en/help/printer/print-job-stuck, diakses 11 Nov 2026",
+    "S3": "Box.co.uk, 'Printer Not Working? Common Printing Problems and Easy Fixes' (terakhir diperbarui 8 Jul 2026), https://box.co.uk/blog/printer-not-working-common-problems-fixes, diakses 11 Nov 2026"
+  },
+  "fakta": {
+    "wifi_terputus": "Apakah printer tidak tersambung ke Wi-Fi / sinyal lemah?",
+    "kabel_longgar": "Apakah kabel USB/daya printer longgar atau tidak terpasang rapat?",
+    "status_offline": "Apakah printer tampil berstatus 'Offline' di komputer?",
+    "kertas_tersangkut": "Apakah ada kertas macet / lampu atau pesan paper jam menyala?",
+    "tidak_ada_kertas": "Apakah tray kertas kosong?",
+    "tinta_habis": "Apakah tinta/toner habis atau hampir habis?",
+    "pekerjaan_menumpuk": "Apakah dokumen tertahan di antrean cetak (print queue) dan tidak bergerak?",
+    "driver_lama": "Apakah driver printer sudah lama / belum pernah diperbarui atau baru saja error setelah update?",
+    "hasil_kosong": "Apakah kertas keluar tetapi hasil cetaknya kosong/blank?",
+    "lama_tidak_dipakai": "Apakah printer sudah berminggu-minggu tidak dipakai?"
+  },
+  "aturan": [
+    {"id": "R1", "if": ["wifi_terputus", "kabel_longgar"], "mode": "atau", "then": "koneksi_bermasalah", "sumber": ["S1", "S3"]},
+    {"id": "R2", "if": ["status_offline", "koneksi_bermasalah"], "mode": "dan", "then": "printer_offline_koneksi", "sumber": ["S1", "S3"]},
+    {"id": "R3", "if": ["kertas_tersangkut", "tidak_ada_kertas"], "mode": "atau", "then": "masalah_kertas", "sumber": ["S2", "S3"]},
+    {"id": "R4", "if": ["masalah_kertas", "tinta_habis"], "mode": "atau", "then": "printer_berhenti_di_tengah_job", "sumber": ["S2"]},
+    {"id": "R5", "if": ["pekerjaan_menumpuk", "printer_berhenti_di_tengah_job"], "mode": "dan", "then": "antrean_macet", "sumber": ["S2", "S3"]},
+    {"id": "R6", "if": ["status_offline", "driver_lama"], "mode": "dan", "then": "driver_bermasalah", "sumber": ["S1"]},
+    {"id": "R7", "if": ["hasil_kosong", "lama_tidak_dipakai"], "mode": "dan", "then": "kepala_cetak_kering", "sumber": ["S1"]},
+    {"id": "R8", "if": ["hasil_kosong", "tinta_habis"], "mode": "dan", "then": "kartrid_perlu_diganti", "sumber": ["S3"]}
+  ],
+  "kesimpulan": {
+    "printer_offline_koneksi": "Printer offline karena koneksi. Periksa kabel/Wi-Fi, pastikan printer menyala dan terhubung; jika Wi-Fi terus gagal, reset pengaturan nirkabel printer lalu setel ulang dari awal.",
+    "masalah_kertas": "Ada masalah kertas. Matikan printer, buka jalur kertas dan keluarkan kertas/serpihan yang macet, atau isi ulang tray kertas.",
+    "antrean_macet": "Antrean cetak macet. Batalkan dokumen yang tertahan di print queue, atasi penyebab fisiknya (kertas/tinta), restart spooler/printer lalu cetak ulang.",
+    "driver_bermasalah": "Driver kemungkinan usang/rusak. Unduh driver terbaru dari situs resmi produsen, pasang ulang, lalu restart komputer.",
+    "kepala_cetak_kering": "Kepala cetak kemungkinan kering karena lama tidak dipakai. Jalankan 2-3 siklus pembersihan kepala cetak.",
+    "kartrid_perlu_diganti": "Tinta/toner habis sehingga hasil kosong. Ganti kartrid atau isi ulang tinta."
+  }
+}
